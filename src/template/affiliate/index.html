@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+    <meta name="title" content="온비즈오피스" />
+    <meta name="subject" content="가상오피스 1인실에서 80평까지 분할임대" />
+    <meta name="description" content="가상오피스 1인실에서 80평까지 분할임대, 삼성역 풀옵션 Onbiz Office">
+    <meta name="keywords" content="가상오피스, 80평, 분할임대, 삼성역, 풀옵션,Onbiz Office" />
+    <meta name="classification" content="소호사무실" />
+
+    <!-- 오픈그래프 -->
+    <meta property="og:title" content="온비즈오피스">
+    <meta property="og:url" content="http://onbiz.co.kr">
+    <meta property="og:image" content="http://img.onbiz.co.kr/images/og_onbiz.jpg">
+    <meta property="Description" content="가상오피스 1인실에서 80평까지 분할임대, 삼성역 풀옵션 Onbiz Office">
+    <!-- twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="http://onbiz.co.kr">
+    <meta name="twitter:title" content="온비즈오피스">
+    <meta name="twitter:description" content="가상오피스 1인실에서 80평까지 분할임대, 삼성역 풀옵션 Onbiz Office">
+    <meta name="twitter:image" content="http://img.onbiz.co.kr/images/og_onbiz.jpg">
+
+    <!-- Android icon -->
+    <link rel="shortcut icon" type="image/x-ico" href="http://img.onbiz.co.kr/favicon/icon128x128.png" />
+    <!-- iPhone icon -->
+    <link rel="apple-touch-icon" type="image/x-ico" sizes="57x57" href="http://img.onbiz.co.kr/favicon/icon57x57.png" />
+    <!-- iPad icon -->
+    <link rel="apple-touch-icon" type="image/x-ico" sizes="72x72" href="http://img.onbiz.co.kr/favicon/icon72x72.png" />
+    <!-- iPhone icon(Retina) -->
+    <link rel="apple-touch-icon" type="image/x-ico" sizes="114x114"
+        href="http://img.onbiz.co.kr/favicon/icon114x114.png" />
+    <!-- iPad icon(Retina) -->
+    <link rel="apple-touch-icon" type="image/x-ico" sizes="144x144"
+        href="http://img.onbiz.co.kr/favicon/icon144x144.png" />
+
+    <title>온비즈안내페이지</title>
+
+    <link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css">
+    <link rel="stylesheet" href="http://static.onbiz.co.kr/css/common_renewal.css?ver=20210702094017" type="text/css">
+    <link rel="stylesheet" href="http://static.onbiz.co.kr/css/complete/complete2.css?ver=20210702094017"
+        type="text/css">
+    <script src="http://static.onbiz.co.kr/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="http://static.onbiz.co.kr/js/onbiz_w.js?ver=20210702094017" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="http://static.onbiz.co.kr/css/jquery-ui.css" />
+    <script type="text/javascript" src="http://static.onbiz.co.kr/js/jquery_ui.js"></script>
+    <script type="text/javascript" src="http://static.onbiz.co.kr/js/datepicker_ko.js"></script>
+    <script type="text/javascript" src="http://static.ssenflower.co.kr/js/jquery.number.js"></script>
+    <script type="text/javascript" src="http://post.ebiznetworks.co.kr/post2.php" charset="utf-8"></script>
+    <script src="http://static.onbiz.co.kr/js/jquery.bxslider.min.js"></script>
+    <script src="http://static.onbiz.co.kr/js/signature_pad.js"></script>
+    <script src="http://static.onbiz.co.kr/js/common.js?ver=20210702094017"></script>
+    <!-- ie9이하 html5, 미디어쿼리 작동 -->
+    <!--[if lte IE 8]>
+<link rel="stylesheet" href="http://static.onbiz.co.kr/css/ie9-lt.css" type="text/css">
+<script type="text/javascript" src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<script>
+    document.domain = "onbiz.co.kr";
+    window.name = "onbiz";
+
+    $(function () {
+        $("#m_est").datepicker({
+            dateFormat: "yy-mm-dd", showAnim: "slideDown", dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"], minDate: 0, maxDate: 3, changeMonth: true, changeYear: true, onSelect: function () {
+
+                val = this.value;
+
+                $("#m_est").val(val);
+                $("input[name='date']").val(val);
+
+                $.ajax({
+                    type: "post",
+                    url: "/info/state.php",
+                    data: "mode=rdate&a=" + val + "&b=" + $("input[name='month']").val(),
+                    success: function (r) {
+                        //$("#sdate").html(val);
+                        $("#edate").html(r);
+                    }
+                });
+            }
+        });
+
+        $("#service2").keyup(function () { $("#service1").val($(this).val()); });
+        $("#r_bank").keyup(function () { $("#bank1").val($(this).val()); });
+    });
+
+    function goMove(e) {
+        location.href = e;
+    }
+</script>
+
+</head>
+
+<!----- 유입 카운터 출력 ---------------->
+<div style="position:absolute; top:130px; margin-right:520px;right:50%;z-index:9999;">
+    <iframe id="ebiz_counter" src="http://www.onbiz.co.kr/web-home/ebiz_counter_2.php?dsite=onbiz" width="300"
+        height="210" allowtransparency="true" ; frameborder="0" marginheight="0" marginwidth="0" scrolling="0"
+        style="text-align:left;height:210px; z-index:10;"></iframe>
+</div>
+<!----- 유입 카운터 출력 끝---------------->
+
+
+<!----- 유입 카운터 출력 ---------------->
+<div style="position:absolute; top:130px; margin-left:520px; left:50%; z-index:9999;">
+    <iframe id="ebiz_counter" src="http://www.onbiz.co.kr/web-home/ebiz_counter_affiliate.php?dsite=onbiz" width="300"
+        height="210" allowtransparency="true" ; frameborder="0" marginheight="0" marginwidth="0" scrolling="0"
+        style="text-align:left;height:210px; z-index:10;"></iframe>
+</div>
+<!----- 유입 카운터 출력 끝---------------->
+
+
+<style>
+    /*메인 로그인창*/
+    #loginWraper {
+        position: relative;
+        bordeR: 1px solid red;
+        z-index: 100001;
+    }
+
+    #loginWraper .login_popBg {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 100000;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        opacity: 0.8;
+        filter: alpha(opacity=80);
+    }
+
+    #loginWraper .loginBox {
+        position: fixed;
+        top: 219px;
+        left: 50%;
+        margin-left: -213px;
+        width: 426px;
+        height: 230px;
+        background: #fff;
+        z-index: 100005;
+    }
+
+    .loginBox .login_top {
+        position: relative;
+        width: 426px;
+        height: 60px;
+        background: #f1f1f1;
+        font-family: 'Nanum Gothic', sans-serif;
+        font-size: 24px;
+        color: #504848;
+        line-height: 60px;
+        text-align: center;
+        font-weight: 800;
+        margin-bottom: 20px;
+    }
+
+    .loginBox .login_top span {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        width: 16px;
+        height: 18px;
+        cursor: pointer;
+    }
+
+    .loginBox div {
+        font-size: 17px;
+    }
+
+    .loginBox div label {
+        float: left;
+        width: 90px;
+        text-align: right;
+        margin-left: 0px;
+        padding-right: 15px;
+    }
+
+    .login_name {
+        position: relative;
+        width: 486px;
+        height: 43px;
+    }
+
+    .login_name label {
+        line-height: 36px;
+    }
+
+    .login_name input {
+        width: 281px;
+        height: 36px;
+        border: 1px solid #9a9a9a;
+        border-radius: 5px;
+        font-family: 'Nanum Gothic', sans-serif;
+        font-size: 17px;
+        padding-left: 5px;
+    }
+
+    .login_name span {
+        position: absolute;
+        top: 40px;
+        left: 142px;
+        font-size: 12px;
+    }
+
+    .login_email {
+        width: 486px;
+        height: 55px;
+        margin-top: 23px;
+    }
+
+    .login_email label {
+        ;
+        line-height: 40px;
+    }
+
+    .login_email input {
+        width: 125px;
+        height: 36px;
+        border: 1px solid #9a9a9a;
+        border-radius: 5px;
+        font-family: 'Nanum Gothic', sans-serif;
+        font-size: 17px;
+        padding-left: 5px;
+    }
+
+    .login_phone {
+        width: 426px;
+        height: 45px;
+    }
+
+    .login_phone label {
+        line-height: 36px;
+    }
+
+    .login_phone input {
+        width: 80px;
+        height: 36px;
+        border: 1px solid #9a9a9a;
+        border-radius: 5px;
+        font-size: 13px;
+        text-align: center;
+        font-family: 'Nanum Gothic', sans-serif;
+    }
+
+    .login_btn {
+        width: 361px;
+        height: 44px;
+        margin: 0 auto;
+    }
+
+    .login_btn input {
+        display: block;
+        width: 361px;
+        height: 44px;
+        background: #ff9600;
+        border: none;
+        font-size: 20px;
+        color: #fff;
+        font-weight: 600;
+        margin-top: 15px;
+        border-radius: 5px;
+        font-family: 'Nanum Gothic', sans-serif;
+        cursor: pointer;
+    }
+</style>
+
+<div id="loginWraper" style="display:none">
+    <div class="login_popBg"></div>
+    <div class="loginBox" style="position:fixed; height:276px;">
+        <form id="zform" method="post" action="/info/state.php">
+            <input type="hidden" name="mode" value="search3" />
+            <input type="hidden" name="gubun" value="강남" />
+            <div class="login_top">강남점 임대신청서 내역 조회<span><img src="http://img.onbiz.co.kr/close.png" alt="닫기"
+                        onclick="layer_on('loginWraper')" /></span></div>
+            <div class="login_phone">
+                <label for="phone">종류&nbsp;</label>
+                <select name="type" style="border-radius:5px; width:130px; height:36px;"
+                    onchange="javascript: type_change(this.value);">
+                    <option value="1">비상주오피스</option>
+                    <option value="2">코워킹스페이스</option>
+                </select>
+            </div>
+            <div class="login_phone"><label for="phone" id="t_change">호수&nbsp;</label><input type="text" id="p_room"
+                    name="p_room" maxlength="7" /> </div>
+            <div class="login_phone"><label for="phone">연락처&nbsp;</label><input type="text" id="ztel1" name="ztel1"
+                    maxlength="4" onkeyup="etc.onlynum(this.value, this.id);" /> - <input type="text" id="ztel2"
+                    name="ztel2" maxlength="4" onkeyup="etc.onlynum(this.value, this.id);" /> - <input type="text"
+                    id="ztel3" name="ztel3" maxlength="4" onkeyup="etc.onlynum(this.value, this.id);" /> </div>
+
+            <div class="login_btn"><input type="button" value="확 인" onclick="test2();" style="margin-top:5px;" /></div>
+        </form>
+    </div>
+</div>
+
+<div id="search"></div>
+
+<script type="text/javascript">
+
+    function test2() {
+        if (!$("#p_room").val()) {
+            alert("호수를 입력해주세요.");
+            $("#p_room").focus();
+            return;
+        }
+        if (!$("#ztel1").val()) {
+            alert("전화번호를 입력해주세요.");
+            $("#ztel1").focus();
+            return;
+        }
+        if (!$("#ztel2").val()) {
+            alert("전화번호를 입력해주세요.");
+            $("#ztel2").focus();
+            return;
+        }
+        if (!$("#ztel3").val()) {
+            alert("전화번호를 입력해주세요.");
+            $("#ztel3").focus();
+            return;
+        }
+
+        $.ajax({
+            type: "post",
+            url: "/info/state.php",
+            data: $("#zform").serialize(),
+            success: function (r) {
+                res = r.split("||");
+
+                if (res[0] == "N") {
+                    alert(res[1]);
+                } else {
+                    $("#search").html(r);
+                }
+            }
+        });
+    }
+
+    function type_change(t) {
+        if (t == "1") {
+            $("#t_change").html("호수");
+        } else {
+            $("#t_change").html("이름");
+        }
+    }
+
+    function layer_on(id) {
+        if ($("#" + id).hasClass("l_on") == true) {
+            $("#" + id).removeClass("l_on");
+            $("#" + id).hide();
+        } else {
+            $("#" + id).addClass("l_on");
+            $("#" + id).show();
+        }
+    }
+</script>
+
+<body>
+    <h1 class="hidden">온비즈오피스</h1>
+
+
+    <div id="wrap">
+        <!-- 상단 지역선택 추가 -->
+        <div class="region_wrap">
+            <div class="region_box clr">
+                <p class="nth-1">온비즈 오피스<span class="l_icon">ㅣ</span><span class="fc1"
+                        style="font-size: 12px; letter-spacing: -1px;">강남본점: 010-4429-3013 &nbsp; / &nbsp; 성수지점:
+                        010-4429-3023 &nbsp; / &nbsp; 역삼지점: 010-4429-3023 &nbsp; / &nbsp; 구로지점: 010-4429-3023 &nbsp; /
+                        &nbsp; 아산지점: 010-4429-3023 &nbsp; / &nbsp; 원주지점: 010-4429-3019 &nbsp;</span></p>
+                <p class="nth-2">
+                    <!--a href="http://gwangju.onbiz.co.kr" class="a1">광주<span>&gt;</span></a><a href="http://busan.onbiz.co.kr" class="a2">부산<span>&gt;</span></a-->
+                </p>
+            </div>
+        </div>
+
+        <!-- 헤더  -->
+        <div class="h_wrap">
+            <header id="header" class="clr">
+                <h2 class="in"><a href="/"><img src="http://img.onbiz.co.kr/logo_gn.png" alt="온비트오피스로고" /></a></h2>
+                <div class="g_wrap">
+                    <nav id="gnb" class="clr" style="width:300px;">
+                        <h2><a href="/info/guide.php">임대신청</a> <span>&gt;</span></a></h2>
+                        <ul class="clr">
+                            <li onclick="layer_on('loginWraper')"><a href="#">임대 신청내역 확인</a> <span>&gt;</span></a></li>
+                        </ul>
+                    </nav>
+                    <!-- <p class="tel">가맹점 모집: 010-4429-3013</p> -->
+                </div>
+            </header>
+        </div>
+        <link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css">
+        <link rel="stylesheet" href="http://static.onbiz.co.kr/css/common_renewal.css" type="text/css">
+        <link rel="stylesheet" href="http://static.onbiz.co.kr/css/complete/complete.css" type="text/css">
+        <link rel="stylesheet" href="http://static.onbiz.co.kr/css/partners.css" type="text/css">
+        <style>
+            .sec .office li {
+                margin-left: 156px;
+            }
+        </style>
+        <script src="http://static.onbiz.co.kr/js/partners.js" type="text/javascript"></script>
+        <script type="text/javascript">
+
+            function checktype(type, field) {
+                if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+                    if (type == "en2") {
+                        var inputVal = $("#" + field + "").val();
+                    } else {
+                        var inputVal = $("input[name='" + field + "']").val();
+                    }
+                    switch (type) {
+                        case "email1":
+                            $("input[name='" + field + "']").val(inputVal.replace(/[^a-z0-9\-_]/gi, ''));
+                            break;
+
+                        case "email2":
+                            $("input[name='" + field + "']").val(inputVal.replace(/[^a-z0-9\.]/gi, ''));
+                            break;
+
+                        case "en":
+                            $("input[name='" + field + "']").val(inputVal.replace(/[^a-z0-9]/gi, ''));
+                            break;
+
+                        case "en2":
+                            $("#" + field + "").val(inputVal.replace(/[^a-z]/gi, ''));
+                            break;
+
+                        case "number":
+                            $("input[name='" + field + "']").val(inputVal.replace(/[^0-9]/gi, ''));
+                            break;
+
+                        case "kor":
+                            $("input[name='" + field + "']").val(inputVal.replace(/[^가-힣\.]/gi, ''));
+                            break;
+
+                        case "pw":
+                            $("input[name='" + field + "']").val(inputVal.replace(/[^a-zA-Z0-9]/gi, ''));
+                            break;
+
+                        case "kor2":
+                            $("input[name='" + field + "']").val(inputVal.replace(/[^가-힣a-zA-Z]/gi, ''));
+                            break;
+                    }
+                }
+            }
+            function inquiry() {
+                if ($("input[name='name']").val() == "") {
+                    alert("성함을 입력해주세요");
+                    $("input[name='name']").focus();
+                    return false;
+                }
+                if ($("input[name='tel']").val() == "") {
+                    alert("연락처를 입력해주세요");
+                    $("input[name='tel']").focus();
+                    return false;
+                }
+                if ($("input[name='email']").val() == "") {
+                    alert("이메일주소를 입력해주세요");
+                    $("input[name='email']").focus();
+                    return false;
+                }
+                if ($("input[name='money']").val() == "") {
+                    alert("예정투자금액을 입력해주세요");
+                    $("input[name='money']").focus();
+                    return false;
+                }
+                if ($("input[name='area']").val() == "") {
+                    alert("선호지역을 입력해주세요");
+                    $("input[name='area']").focus();
+                    return false;
+                }
+                if ($("#contents").val() == "") {
+                    alert("문의사항을 입력해주세요");
+                    $("#contents").focus();
+                    return false;
+                }
+                $.ajax({
+                    type: "POST",
+                    data: $("#inquiry").serialize(),
+                    url: "./state.php",
+                    success: function (data) {
+                        if (data == "SUCC") {
+                            if ($(':radio[name="r2"]:checked').val() == "tel") {
+                                alert("문의내용은 입력하신 연락처로 회신됩니다.");
+                            } else {
+                                alert("문의내용은 입력하신 이메일로 회신됩니다.");
+                            }
+                            location.reload();
+                        } else {
+                            alert("잠시후 다시시도해주세요");
+                        }
+                    }
+                });
+            }
+        </script>
+        <div class="t_wrap">
+            <ul class="top_menu">
+                <li><a href="/?num=1">홈</a></li>
+                <li><a href="/?num=2">소개</a></li>
+                <!--li><a href="#">가맹점모집</a></li-->
+                <li><a href="/?num=3">서비스</a></li>
+                <li><a href="/?num=4">입주사</a></li>
+                <li><a href="/?num=5">둘러보기</a></li>
+                <li><a href="/?num=6">오시는길</a></li>
+            </ul>
+        </div>
+        <section class="sec intro">
+            <div class="wrap">
+                <div class="indicator"
+                    style="left:200px;left: 50%; margin-left: -750px;z-index:99999999;text-align:left;left: 50%; margin-left: -40%;">
+                    <p>가맹점모집</p>
+                    <ul>
+                        <li class="on"><a href="#">온비즈 소개</a></li>
+                        <li><a href="#">개설특장점</a></li>
+                        <li><a href="#">개설절차</a></li>
+                        <li><a href="#">예상수익률</a></li>
+                        <li><a href="#">개설문의</a></li>
+                    </ul>
+                </div>
+                <!-- 2021.07.02 우측배너 추가 -->
+                <div class="banner-franchisee">
+                    <a href="#partners">
+                        <img src="http://img.onbiz.co.kr/banner/banner_affiliate.png" alt="온비즈 가맹점 창업상담 010-4429-3013">
+                    </a>
+                </div>
+                <!-- //2021.07.02 우측배너 추가 -->
+                <div class="ancor">
+                    <a href="#"><img src="http://img.onbiz.co.kr/top_btn.png"></a>
+                </div>
+                <h4 class="title" style="margin-top: 0px;">Why, Onbiz Office?</h4>
+                <p class="s_txt02">
+                    온비즈 오피스는 중심업무지구(Central Business District)의 프라임급 오피스에 위치하고 수준높은<br />
+                    고객들의 눈높이에 맞는 높은 퀄리티의 시설과 서비스 수준을 유지하여 최적의 오피스 환경 및 시스템 제공을 약속합니다.
+                </p>
+                <div class="info">
+                    <ul>
+                        <li>
+                            <strong>다년간 쌓아온 운영노하우 전달</strong>
+                            <p>
+                                서울 중심권에서 수많은 업체들과 경쟁하며 쌓아온 온비즈오피스만의 노하우를 전수하여<br />
+                                든든한 동반자로서 안정된 수익을 창출하도록 많은 도움을 드릴 수 있습니다.
+                            </p>
+                        </li>
+                        <li>
+                            <strong>고급스런 인테리어와 넓은 공간감</strong>
+                            <p>
+                                사무공간(각실) 우선확보의 수익우선적 평면계획과 사무용 가구배치를 지양하고, 고객과 클라이언트들에게 보다<br />
+                                고급스런 이미지를 부여하기 위하여 넓은 복도와 부대공간,고급 소재의 맞춤형 사무가구를 지향하였습니다.
+                            </p>
+                        </li>
+                        <li>
+                            <strong>편리하고 안전한 온비즈오피스만의 시스템 </strong>
+                            <p>
+                                초고속 인터넷 시스템으로 업무의 편리성을 도모,안전사고 예방을 위한 CCTV 설치및 보안 시스템 구축.<br />
+                                쾌적한 냉난방 24시간 제공으로 고객과 고객의 클라이언트들에게 높은 수준의 오피스 서비스를 제공하도록 최선을 다하고있습니다.
+                            </p>
+                        </li>
+                        <li>
+                            <strong>갑질 논란없는 본사</strong>
+                            <p>
+                                과도한 물품 구매 비용 청구를 하지 않습니다.<br />
+                                기본적으로 내구연한이 높은 자재를 사용하여, 인테리어 리뉴얼을 강요하는 등의 행위를 하지않습니다.<br />
+                                일방적으로 계약 해지나 과도한 위약금을 부과하지 않습니다.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <h4 class="title">가상오피스</h4>
+                <p class="s_txt01">사무실을 필요로 하지 않는 고객을 위한 신개념 서비스</p>
+                <p class="s_txt02">사무실 또는 집무실이 필요치 않는 비즈니스를 하는 법인(개인)고객들에게 주소지 또는 국선전화(1회선)를 포함하여 제공하며, 비즈니스에 필요한 인적
+                    서비스도 가능한 명목상의 오피스입니다.</p>
+                <ul class="office">
+                    <li>
+                        <div class="top">
+                            <p>사업장 주소제공</p>
+                        </div>
+                        <div class="btm">
+                            <p>
+                                선릉역 업무중심지<br />
+                                (Central Business<br />
+                                District)에<br />
+                                사업장 주소지 제공
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="top">
+                            <p>우편물 알림 서비스</p>
+                        </div>
+                        <div class="btm">
+                            <p>
+                                중요 우편물 수신<br />
+                                SNS 또는 e0mail<br />
+                                알람 서비스
+                            </p>
+                        </div>
+                    </li>
+                    <!-- <li>
+					<div class="top">
+						<p>
+							국선전화개통<br />
+							(착신&amp;전화응대)
+						</p>
+					</div>
+					<div class="btm">
+						<p>
+							국선전화 개통 후<br />
+							착신서비스<br />
+							전용전화번호 제공 및<br />
+							응대서비스
+						</p>
+					</div>
+				</li> -->
+                    <li>
+                        <div class="top">
+                            <p>
+                                오프라인<br />
+                                오피스 이용
+                            </p>
+                        </div>
+                        <div class="btm">
+                            <p>
+                                라운지, 컨퍼런스룸 및<br />
+                                미팅룸 이용은 예약 후<br />
+                                사용이가능 합니다.<br />
+                                OA기기 사용
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+                <p class="s_txt04">※ 자세한 안내는 전화 <strong>010-4429-3013</strong> 또는 <strong>온라인 문의하기</strong>를 이용하시면 신속하게
+                    답변 드리겠습니다.</p>
+            </div>
+        </section>
+        <section class="sec">
+            <div class="wrap">
+                <h3 class="title">개설 특장점</h3>
+                <p class="s_txt02">온비즈 오피스는 여러분의 성공적인 가맹점 개설을 약속 드립니다.</p>
+                <ul class="ico_list clr">
+                    <li class="ico_list01">
+                        <strong>로열티 지불 NO</strong>
+                        <p class="line2">
+                            사무실 비용을 최대 절약하여<br />
+                            사업 초기 투자지출을 대폭 절감하세요!
+                        </p>
+                    </li>
+                    <li class="ico_list02">
+                        <strong>저렴한 인테리어</strong>
+                        <p class="line4">
+                            고품격 사무 가구를 합리적인<br />
+                            비용으로 고객 요구에 따라 자유로이 공간<br />
+                            배치를 활용할 수 있도록 맞춤 공간 배치를<br />
+                            제공 합니다.
+                        </p>
+                    </li>
+                    <li class="ico_list03">
+                        <strong>활발한 광고 홍보활동 전개!</strong>
+                        <p class="line3">
+                            지점 홈페이지 제작 및 광고<br />
+                            진행(네이버, 다음등 포털 사이트<br />
+                            1순위 광고진행)
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="sec process">
+            <div class="wrap">
+                <h3 class="title">개설절차</h3>
+                <p class="s_txt02">온비즈 오피스는 여러분의 성공적인 가맹점 개설을 약속 드립니다.</p>
+            </div>
+            <div class="setup">
+                <ol class="hidden">
+                    <li>STEP 1 본사 홈페이지 소정약식 개설신청 접수</li>
+                    <li>STEP 2 지역담당자 현장조사</li>
+                    <li>STEP 3 지상조사 및 분석</li>
+                    <li>STEP 4 출점 타당성 검토</li>
+                    <li>STEP 5 최종 협의 결정</li>
+                    <li>STEP 6 가맹 계약 체결</li>
+                    <li>
+                        STEP 7
+                        <ul>
+                            <li>건물주 : 인테리어 공사 및 사무집기 셋팅 운영교육</li>
+                            <li>가맹점주 : 임대차계약 진행, 인테리어 공시 및 사무집기셋팅, 운영교육</li>
+                        </ul>
+                    </li>
+                    <li>STEP 8 지정 홈페이지 제작 및 광고 진행(네이버, 다음등 포털 사이트 1순위 광고진행)</li>
+                    <li>STEP 9 개설완료</li>
+                </ol>
+            </div>
+        </section>
+        <section class="sec">
+            <div class="wrap">
+                <h3 class="title">예상수익률</h3>
+                <p class="s_txt02">
+                    체계화된 시스템으로, 손쉬운 관리/적은 비용으로 큰 수입<br />
+                    제 2의 인생에 도전하세요!
+                </p>
+                <div class="invest">
+                    <div class="top">
+                        <p>온비즈 오피스 초기 투자비용</p>
+                    </div>
+                    <div class="btm">
+                        <p>임대 보증금 포함</p>
+                        <strong class="money">1억 ~ 3억원</strong>
+                    </div>
+                </div>
+                <p class="s_txt01"><span class="mark">&ldquo;</span><span class="sign">예 ) 투자 총액이 2억원일 경우</span> 매월
+                    <span class="sign">실 수령액은 900만원</span>이 예상됩니다<span class="mark">&rdquo;</span>
+                </p>
+                <p class="s_txt03">지점 안정화 이후, 데이터를 바탕으로 계산된 금액이며 신규센터의 실제 수익금은 예시와 다를 수 있습니다.</p>
+            </div>
+        </section>
+        <!-- 2021.07.02 아이디값 추가 partners -->
+        <section class="sec partners" id="partners">
+            <div class="wrap">
+                <h3 class="title white">가맹문의</h3>
+                <p class="s_txt02 white">
+                    체계화된 시스템으로, 손쉬운 관리/적은 비용으로 큰 수입<br />
+                    제 2의 인생에 도전하세요!
+                </p>
+                <div class="board_write">
+                    <form id="inquiry">
+                        <input type="hidden" name="mode" value="QBAxVjdUJw==" />
+                        <fieldset>
+                            <legend class="hidden">가맹점 문의하기</legend>
+                            <div class="gruop">
+                                <div class="column3">
+                                    <div class="col">
+                                        <label for="Name" class="block">성함</label>
+                                        <input type="text" title="이름을 입력하세요" id="Name" name="name" maxlength="20"
+                                            class="txt_box" style="width:100%;" />
+                                    </div>
+                                    <div class="col">
+                                        <label for="Tel" class="block">연락처</label>
+                                        <input type="text" title="연락처를 입력하세요" id="Tel" name="tel" maxlength="11"
+                                            onkeyup="javascript:checktype('number','tel')" class="txt_box"
+                                            style="width:100%;" />
+                                    </div>
+                                    <div class="col">
+                                        <label for="Email" class="block">E-MAIL</label>
+                                        <input type="text" title="이메일주소를 입력하세요" id="Email" name="email" maxlength="150"
+                                            class="txt_box" style="width:100%;" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gruop">
+                                <div class="column3">
+                                    <div class="col">
+                                        <span class="block">건물소유</span>
+                                        <div>
+                                            <input type="radio" id="Rad01" class="on" name="r1" value="Y"
+                                                checked="checked" />
+                                            <label for="Rad01" style="margin-right:20px;">보유</label>
+                                            <input type="radio" id="Rad02" name="r1" value="N"
+                                                style="margin-left:15px;" />
+                                            <label for="Rad02">미보유</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <label for="Money" class="block">예정투자금액</label>
+                                        <input type="text" title="예정투자금액을 입력하세요" id="Money" name="money" maxlength="20"
+                                            onkeyup="javascript:checktype('number','money')" class="txt_box"
+                                            style="width:100%;" />
+                                    </div>
+                                    <div class="col">
+                                        <label for="Area" class="block">선호지역</label>
+                                        <input type="text" title="선호지역을 입력하세요" id="Area" name="area" maxlength="200"
+                                            class="txt_box" style="width:100%;" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gruop">
+                                <span class="block">문의사항</span>
+                                <textarea name="contents" id="contents" cols="30" rows="10"></textarea>
+                            </div>
+                            <div class="gruop">
+                                <span>원하는 답변 방법 :</span>
+                                <input type="radio" id="Rad03" class="on" name="r2" value="mail" checked="checked" />
+                                <label for="Rad03" style="margin-right:20px;">E-MAIL</label>
+                                <input type="radio" id="Rad04" name="r2" value="tel" />
+                                <label for="Rad04">전화</label>
+                            </div>
+                            <a href="javascript:inquiry();" class="btn_partners">가맹점 문의하기</a>
+                        </fieldset>
+                    </form>
+                </div>
+                <script type="text/javascript">
+
+                </script>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <script type="text/javascript">
+            function click_family() {
+                var hh = $("#family_list").attr("class");
+                if (hh == "f_on") {
+                    $("#family_list").css({ "display": "none" });
+                    $("#family_list").removeClass("f_on");
+                } else {
+                    $("#family_list").css({ "display": "block" });
+                    $("#family_list").addClass("f_on");
+                }
+            }
+
+
+            $(function () {
+                $(window).scroll(function () {
+                    var scrollTop = $(window).scrollTop();
+                    if (scrollTop > 200) {
+                        $("#comp-ihddinv5").css({ "position": "fixed", "top": "0px", "z-index": "499", "display": "block", "width": "100%", "left": "auto" });		//타이틀라인
+                        $("#_btn_").show();
+                    } else if (scrollTop < 200) {
+                        $("#comp-ihddinv5").css({ "left": "0px", "width": "980px", "top": "102px", "height": "47px", "position": "absolute" });		//타이틀라인
+                        $("#_btn_").hide();
+                    }
+                });
+
+
+                //리뷰 슬라이드
+                $('#review-slider').bxSlider({
+                    /*auto: true,*/
+                    slideWidth: 396,
+                    minSlides: 2,
+                    maxSlides: 2,
+                    slideMargin: 15,
+                    nextSelector: '#slider-next',
+                    prevSelector: '#slider-prev',
+                    nextText: '',
+                    prevText: ''
+                });
+
+            });
+        </script>
+        <style type="text/css">
+            #family_list .fam_btn {
+                width: 120px;
+            }
+        </style>
+        <style type="text/css">
+            #family_list {
+                float: right;
+                width: 120px;
+                border: 1px solid #999999;
+                max-height: 250px;
+                display: none;
+                position: absolute;
+                bottom: 116px;
+                border-bottom: none;
+                background: #f3f1f1;
+                padding: 5px 0px 0px 0px;
+            }
+
+            #family_list .fam_btn {
+                padding: 0px 3px 0px 3px;
+                cursor: hand;
+                height: 20px;
+                width: 120px;
+            }
+
+            .fam_btn_m {
+                padding: 3px 3px 0px 3px;
+                cursor: hand;
+                height: 20px;
+                border: 1px solid #999999;
+            }
+
+            .footerNotice {
+                font-size: 12px;
+                letter-spacing: -0.3px;
+                color: #42454b;
+                margin-bottom: 30px;
+            }
+
+            .footerNotice span {
+                color: #ff5959;
+                font-weight: 600;
+            }
+        </style>
+        <div id="foot">
+            <div class="f-area">
+                <div class="f-top">
+                    <div class="policy">
+                        <!--
+					<a href="#">이용약관</a>
+					&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+					<a href="#"><b><font color="white">개인정보처리방침</font></b></a>
+					&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+					-->
+                        <a href="/affiliate/">입점/제휴문의</a>
+                        &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+                        <a href="/info/guide.php#faq">고객센터</a>
+                        &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+                        <a href="/info/guide.php">임대신청</a>
+                    </div>
+                    <div id="family_site" style="float: right;width: 120px;text-align: left;font-size:12px;">
+                        <div class="fam_btn_m" style="border: 1px solid #999999;width:114px;"
+                            onclick="javascript:click_family();">
+                            <p style="color: #616161;font-weight: 600;">family
+                                site&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▲</p>
+                        </div>
+
+
+                        <ul id="family_list" style="max-height:none;display:none;width:120px;z-index:9999;">
+                            <li>
+                                <div class="fam_btn"><a href="http://www.ebiznetworks.co.kr/"
+                                        target="_blank">이비즈네트웍스</a></div>
+                            </li>
+                            <li style='margin-top:10px;'>
+                                <div class="fam_btn" style='font-weight:bold; color: #111111;'>[ 부동산 ]</div>
+                            </li>
+                            <li>
+                                <div class="fam_btn"><a href="http://www.monotower.com" target="_blank"
+                                        style='color: #111111;'>모노타워</a></div>
+                            </li>
+                            <li>
+                                <div class="fam_btn"><a href="http://www.monopalace.com" target="_blank"
+                                        style='color: #111111;'>모노팰리스</a></div>
+                            </li>
+                            <li>
+                                <div class="fam_btn"><a href="http://www.ditower.co.kr" target="_blank"
+                                        style='color: #111111;'>DI타워</a></div>
+                            </li>
+                            <li>
+                                <div class="fam_btn"><b style='color:#ff0000;'>온비즈 오피스</b></div>
+                            </li>
+                            <li style='margin-top:10px;'>
+                                <div class="fam_btn" style='font-weight:bold; color: #111111;'>[ 호텔/리조트 ]</div>
+                            </li>
+                            <li>
+                                <div class="fam_btn"><a href="http://www.ocean2you.co.kr" target="_blank"
+                                        style='color: #111111;'>오션투유리조트</a></div>
+                            </li>
+                            <li>
+                                <div class="fam_btn"><a href="http://www.seabay.co.kr" target="_blank"
+                                        style='color: #111111;'>씨베이호텔</a></div>
+                            </li>
+                            <li>
+                                <div class="fam_btn"><a href="http://intoraon.co.kr" target="_blank"
+                                        style='color: #111111;'>정선인투라온호텔</a></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="f-bottom">
+                    <div class="f-logo">
+                        Onbiz Office </div>
+                    <div class="address">
+                        <p>
+                            <strong>(주)이비즈네트웍스</strong><br>
+                            <span>
+                                대표이사 : 박기범<br>
+                                주소 : 서울특별시 강남구 테헤란로82길 15, (대치동, 디아이타워)<br>
+                                사업자등록번호 : 220-87-30865
+                            </span>
+                            <!-- <a href="javascript: window.open('http://www.ftc.go.kr/bizCommPop.do?wrkr_no=2208730865');">
+							<img src="http://img.onbiz.co.kr/btn_copyinfo_gray.gif" alt="사업자정보확인">
+						</a> -->
+                        </p>
+                        <div class="four-list">
+                            <img src="http://img.onbiz.co.kr/f_mark01.gif" alt="" />
+                            <img src="http://img.onbiz.co.kr/f_mark02.gif" alt="" />
+                            <img src="http://img.onbiz.co.kr/f_mark03.gif" alt="" />
+                            <img src="http://img.onbiz.co.kr/f_mark04.gif" alt="" />
+                        </div>
+                        <p class="copy">Copyright &copy; EbizNetworks. All Rights Reserved.</p>
+                    </div>
+                    <ul class="customer">
+                        <li class="f_call">
+                            <p>고객상담</p>
+                            <strong>
+                                010-4429-3013 </strong>
+                        </li>
+                        <li class="f_mail">
+                            <p>E-mail 문의</p>
+                            <a href="onbiz@ebiznetworks.co.kr">
+                                <strong>
+                                    onbiz@<br>
+                                    ebiznetworks.co.kr
+                                </strong>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- // Footer -->
+    </div>
+</body>
+
+</html>
